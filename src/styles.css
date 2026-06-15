@@ -1,0 +1,605 @@
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --ink: #2b2b30;
+  --muted: #8a8a92;
+  --border: #e4e3df;
+  --primary: #2f6fb0;
+  --primary-soft: #e2ecf7;
+  --amber: #d98a3a;      /* 「暂未见」中性橙，非红 */
+  --amber-soft: #fbeedd;
+  --amber-ink: #9a6020;
+  --danger: #c0392b;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --radius: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ── App shell ──────────────────────────────────────────── */
+.app {
+  min-height: 100dvh;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+.app__inner {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+/* ── TopBar（返回按钮 ≥44×44）────────────────────────────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px 10px;
+  background: var(--bg);
+  margin: 0 -16px;
+}
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.topbar__title {
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar__back {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+}
+.tagline {
+  margin: 4px 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ── Cards ──────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.card--caveats {
+  background: #fbfaf7;
+}
+.card--target {
+  background: #fbfaf7;
+}
+
+/* ── Form fields ────────────────────────────────────────── */
+.field {
+  display: block;
+  margin-bottom: 12px;
+}
+.field > span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px; /* ≥16px 防 iOS 聚焦缩放 */
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn-primary,
+.btn-ghost {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border);
+}
+.btn-ghost:disabled {
+  color: var(--muted);
+  border-color: var(--border);
+  background: #f3f2ef;
+  cursor: not-allowed;
+}
+.btn-mini {
+  padding: 8px 12px;
+  font-size: 13px;
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+/* ── Class / lesson lists ───────────────────────────────── */
+.class-item {
+  border-top: 1px solid var(--border);
+  padding: 12px 0;
+}
+.class-item:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+.class-item__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lesson-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.lesson-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px dashed var(--border);
+  font-size: 14px;
+}
+.lesson-list li:first-child {
+  border-top: none;
+}
+.lesson-list__acts {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+
+/* ── Marking page ───────────────────────────────────────── */
+.marking__ctx {
+  margin-bottom: 10px;
+}
+.marking__ctx .muted {
+  margin: 6px 0 0;
+}
+.evidence-box {
+  margin-top: 4px;
+  padding: 8px 10px;
+  background: #fbfaf7;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.metric-toggle {
+  display: flex;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+}
+.metric-toggle--single {
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.metric-toggle button {
+  flex: 1;
+  padding: 10px 8px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.metric-toggle button.is-active {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* Stage selector */
+.stage-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.stage-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+}
+.stage-chip__pen {
+  font-size: 15px;
+  font-weight: 700;
+}
+.stage-chip__phase {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* Group grid —— 全员核验模式 */
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+.group-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 18px 14px;
+  min-height: 92px;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+.group-btn.is-verified {
+  border: 2px solid;
+}
+/* 未核验：中性灰 + 虚框，刻意避免红叉/空勾等暗示「未发生/未完成」的样式 */
+.group-btn.is-unknown {
+  background: #efeeea;
+  border: 2px dashed #cfcec9;
+  color: var(--muted);
+}
+/* 存在「暂未见」成员：中性橙，不是失败红 */
+.group-btn.is-partial {
+  /* 背景/边框/文字色由内联样式给定（amber） */
+}
+.group-btn__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+.group-btn__state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.group-btn__state .muted {
+  font-weight: 500;
+}
+.group-btn .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hint-bar {
+  background: #fbfaf7;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.hint-bar b {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ── Member verification sheet ──────────────────────────── */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-end;
+  z-index: 50;
+}
+.sheet {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-radius: 18px 18px 0 0;
+  padding: 8px 18px calc(20px + env(safe-area-inset-bottom));
+  animation: sheet-up 0.18s ease-out;
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(16px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.sheet__handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  margin: 6px auto 10px;
+}
+.sheet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+}
+.sheet__close {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.sheet__ctx {
+  margin: 8px 0 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.sheet__hint {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: #fbfaf7;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 8px 0 14px;
+}
+.member-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+/* 成员按钮 ≥56×48 */
+.member-chip {
+  min-height: 56px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1.1;
+}
+.member-chip__mark {
+  font-size: 16px;
+}
+.member-chip__no {
+  font-size: 15px;
+}
+.member-chip__state {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.sheet__count {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin: 4px 0 12px;
+}
+.sheet__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.sheet__btn {
+  margin-top: 0;
+}
+.sheet__btn--danger {
+  color: var(--amber-ink);
+  border-color: var(--amber);
+}
+.sheet__btn--danger:disabled {
+  color: var(--muted);
+  border-color: var(--border);
+}
+.sheet__foot {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  text-align: center;
+}
+
+/* ── Feedback page ──────────────────────────────────────── */
+.feedback .card {
+  margin-bottom: 12px;
+}
+.fb-block {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.fb-block--refusal {
+  color: var(--danger);
+  font-weight: 600;
+  background: #fbeae8;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.fb-block--coverage {
+  font-weight: 600;
+}
+.fb-block--verified {
+  background: #f7f8f6;
+  border-left: 3px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 0 8px 8px 0;
+}
+.caveats {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.caveats li {
+  margin-bottom: 6px;
+}
+.fb-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ── Coverage notice ────────────────────────────────────── */
+.coverage {
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.coverage.is-ok {
+  border-color: #cfe0d6;
+  background: #f3f8f4;
+}
+.coverage.is-low {
+  border-color: var(--amber);
+  background: var(--amber-soft);
+}
+.coverage__num {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.coverage__num b {
+  font-size: 18px;
+}
+.coverage__bar {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.coverage__bar span {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.2s;
+}
+.coverage.is-low .coverage__bar span {
+  background: var(--amber);
+}
+.coverage__note {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* chip row (focus stages) */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ── Utilities ──────────────────────────────────────────── */
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 12.5px;
+}
